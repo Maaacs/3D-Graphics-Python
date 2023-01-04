@@ -19,4 +19,6 @@ while True:
     # movimento para bola
     rate(10)
     xPos=xPos+deltaX
+    if (xPos>4 or xPos<-4): # evita passar direto pela parede
+        deltaX=deltaX*(-1)
     marble.pos=vector(xPos,0,0)
