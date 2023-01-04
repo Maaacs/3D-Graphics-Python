@@ -12,5 +12,11 @@ rightwall = box(pos=vector(5,0,0), length=.1, width=10, height=10) # parede dire
 
 marble = sphere(radius=.75, color=color.purple)
 
+deltaX=.1
+xPos=0
+
 while True:
-    pass
+    # movimento para bola
+    rate(10)
+    xPos=xPos+deltaX
+    marble.pos=vector(xPos,0,0)
