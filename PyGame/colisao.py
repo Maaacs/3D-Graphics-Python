@@ -23,21 +23,6 @@ class Bola:
         self.velocidadeX = velox
         self.velocidade = veloY
 
-##Inicia a quantidade de bola, adicionando valores aleatorios a suas entradas
-while cont < qtdBolas:
-    veloX = random () +0.05
-    veloY = random () +0.05
-    posX = randrange (30, largura-40)
-    posY = randrange (30, altura-40)
-    for i in bolas:
-        dist = math.sqrt ( (posX - i.posicaoX)**2 + (posY - i.posicaoY)**2)
-        while dist <= 60:
-            posX = randrange (30, largura-40)
-            posY = randrange (30, altura-40)
-            dist = math.sqrt ((posX - i.posicaoX)**2 + (posY - i.posicaoY)**2)
-    bolas.append(Bola (veloX, veloY, posY, posX))
-    cont+=1
-
 #inicia a quantidade de bola, adicionando valores aleatorios a suas entradas 
 while cont < qtdBolas:
     veloX = random () +0.05
