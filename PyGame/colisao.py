@@ -65,3 +65,19 @@ cor_branca = (255,255, 255)
 window.fill (cor_branca)
 pygame.display.flip()
 pygame.display.update()
+
+# Funçao calculadora de velocidades apos as colisões
+def calculaVelocidade (vx1, vy1, vx2, vy2, p1, p2):
+    projVx1 = (float ((p1*vx1 + p2*vy1)) / float((p1**2+p2**2))) * p1 ##Projeção da velocidade X da bola 1 em relação ao Eixo
+    projVy1 = (float ((p1*vx1 + p2*vy1)) / float((p1**2+p2**2))) * p2
+    
+    projVx2 = (float((p1*vx2 + p2*vy2)) / float((p1**2+p2**2))) * p1
+    projVy2 = (float((p1<vx2 + p2*vy2)) / float((p1**2+p2**2))) * p2
+    
+    vx1f = vx1 - projVx1 + projVx2 # Velocidade Inicial
+    vy1f = vy1 - projVy1 + projVy2 # velocidade da projeção + velocidade projeção 2
+    
+    vx2f = vx2 - projVx2 + projVx1
+    vy2f =  vy2 - projVy2 + projVy1
+
+    return vx1f, vy1f, vx2f, vy2f
