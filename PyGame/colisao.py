@@ -81,3 +81,53 @@ def calculaVelocidade (vx1, vy1, vx2, vy2, p1, p2):
     vy2f =  vy2 - projVy2 + projVy1
 
     return vx1f, vy1f, vx2f, vy2f
+
+while True:
+    ##pygame .time .wait (1)
+    cont = 0
+    while cont < qtdBolas:
+        ##Veriffica se as bolas colidiram na parede
+        if bolas[cont].posicaoX+50 >= largura or bolas[cont].posicaoX <= 0:
+            bolas[cont].velocidadeX *= -1
+        
+        if bolas[cont].posicaoY+50 >= altura or bolas[cont].posicaoY <= 0:
+            bolas[cont].velocidadeY *= -1
+        i = cont + 1
+
+        while i < qtdBolas:
+            ##verifica se as bolas colidiram entre si
+            dist = math.sqrt((bolas[cont].posicaoX - bolas[i].posicaoX)**2 + (bolas[cont].posicaoY - bolas[i].posicaoY) **2)
+            if dist <= 50:
+                ##Se sim, chama a função para verificar as novas velocidades
+                p1 = bolas[cont].posicaoX - bolas[i].posicaoX
+                p2 = bolas[cont].posicaoY - bolas[i].posicaoY
+
+                vx1, vy1, vx2, vy2 = calculaVelocidade(bolas[cont].velocidadeX, bolas[cont].velocidadeY, bolas[i].velocidadeX, bolas[i].velocidadeY,p1,p2)
+                ##Chama os métodos implementados na classe bola para fazer mudanca de variavel
+                bolas[cont].mudaVelocidade(vx1, vy1)
+                bolas[i].mudaVelocidade (vx2, vy2)
+            i+= 1
+        cont+= 1
+    
+    ##Faz as bolinhas se mexerem
+    for i in bolas:
+        ##some com as bolinhas na posição velha
+        tela.blit(bolaBranca, (i.posicaoX, i.posicaoY))
+        i.posicaoX += i.velocidadeX
+        i.posicaoY += i.velocidadeY
+        ##Coloca ela na posição nova
+        tela.blit(bola, (i.posicaoX, i.posicaoY))
+    
+    pygame.display.flip()
+    pygame.display.update()
+    for event in pygame.event.get() :
+        ## Verifica se o usuario apertou a tecla Q
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_q:
+                pygame.quit() ## Fecha a tela do pygame
+                parou = 1
+        if event.type == pygame.QUIT: ## Verifica se o usuario clicou no X vermelho para fechar
+            pygame.quit()
+            parou = 1
+    if parou == 1:
+        break 
