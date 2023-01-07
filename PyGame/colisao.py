@@ -4,20 +4,20 @@ from random import *
 from pygame.locals import *
 
 ##Recebe dados de entrada
-largura = input ("Digite a largura:")
-altura = input ("Digite a altura:")
-qtdBolas = input ("Digite a quantidade de bolas:")
+largura = int(input("Digite a largura:"))
+altura = int(input("Digite a altura:"))
+qtdBolas = int(input("Digite a quantidade de bolas:"))
 cont = 0
 bolas = []
 
 ##Cria uma fabrica de bolas, onde cada uma tem suas devidas instancias clasg Bola:
 class Bola:
     def __init__(self, veloX, veloY, posY, posX):
-        self, veloX, veloY, posY, posx
+        self, veloX, veloY, posY, posX
         self.velocidadeX = veloX
         self.velocidadeY = veloY
         self.posicaoX = posX
-        self.posicaoY = pOSY
+        self.posicaoY = posY
 
     def mudaVelocidade (self, velox, veloY):
         self.velocidadeX = velox
@@ -34,7 +34,7 @@ while cont < qtdBolas:
         while dist <= 60:
             posX = randrange (30, largura-40)
             posY = randrange (30, altura-40)
-            dist = math.sart ((posX - i.posicaoX)**2 + (posY - i.posicaoY)**2)
+            dist = math.sqrt ((posX - i.posicaoX)**2 + (posY - i.posicaoY)**2)
     bolas.append(Bola (veloX, veloY, posY, posX))
     cont+=1
 
